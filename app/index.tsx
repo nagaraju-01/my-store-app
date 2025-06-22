@@ -1,6 +1,6 @@
+import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, ImageBackground } from 'react-native';
-import { useRouter, Stack } from 'expo-router';
+import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

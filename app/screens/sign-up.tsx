@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useRouter } from 'expo-router';
 import React, { useRef, useState } from 'react';
-import { Animated, Easing, Image, KeyboardAvoidingView, Modal, Platform, Pressable, Text, TextInput, View } from 'react-native';
+import { Animated, Easing, Image, KeyboardAvoidingView, Modal, Platform, Pressable, SafeAreaView, Text, TextInput, View } from 'react-native';
 import { api } from '../../src/api/api';
 
 export default function SignUpScreen() {
@@ -72,7 +72,7 @@ export default function SignUpScreen() {
   };
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Stack.Screen options={{ headerShown: false }} />
       <Modal
         visible={modalVisible}
@@ -90,9 +90,9 @@ export default function SignUpScreen() {
           <Animated.View style={{
             backgroundColor: '#fff',
             borderRadius: 18,
-            paddingVertical: 36,
-            paddingHorizontal: 36,
-            minWidth: 240,
+            paddingVertical: 24, // reduced for better scaling
+            paddingHorizontal: 20, // reduced for better scaling
+            minWidth: '70%', // responsive minWidth
             alignItems: 'center',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 4 },
@@ -112,7 +112,7 @@ export default function SignUpScreen() {
         </Animated.View>
       </Modal>
       <KeyboardAvoidingView
-        style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'flex-start', paddingTop: 0, alignItems: 'center', paddingHorizontal: 24 }}
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 16 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <Pressable onPress={handleScreenPress} style={{ flex: 1, width: '100%' }}>
@@ -245,6 +245,6 @@ export default function SignUpScreen() {
           </View>
         </Pressable>
       </KeyboardAvoidingView>
-    </>
+    </SafeAreaView>
   );
 }

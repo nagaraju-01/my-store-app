@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    width: 260,
+    width: '90%', // responsive width for all devices
     backgroundColor: '#f7f7f7',
     borderRadius: 30,
     paddingVertical: 14,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     color: '#222',
   },
   button: {
-    width: 220,
+    width: '90%', // responsive width for all devices
     paddingVertical: 16,
     borderRadius: 30,
     alignItems: 'center',
