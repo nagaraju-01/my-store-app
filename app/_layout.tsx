@@ -22,6 +22,10 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="screens/SignUpScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/SignInScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/add-customer" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/customers-list" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
