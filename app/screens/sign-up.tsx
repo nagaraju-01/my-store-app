@@ -117,131 +117,134 @@ export default function SignUpScreen() {
       >
         <Pressable onPress={handleScreenPress} style={{ flex: 1, width: '100%' }}>
           {/* Custom Back Button */}
-          <Pressable onPress={() => router.replace('/')} style={{ position: 'absolute', top: 8, left: -8, zIndex: 10, padding: 8 }}>
-            <Text style={{ fontSize: 28, color: '#93329e', fontWeight: 'bold' }}>{'<'}</Text>
+          <Pressable onPress={() => router.replace('/')} style={{ position: 'absolute', top: 32, left: 0, zIndex: 10, padding: 16, borderRadius: 24 }}>
+            <Text style={{ fontSize: 36, color: '#93329e', fontWeight: 'bold' }}>{'<'}</Text>
           </Pressable>
           {/* Illustration */}
-          <View style={{ alignItems: 'center', marginTop: 48, marginBottom: 16 }}>
-            <Image source={require('../../assets/images/register.png')} style={{ width: 180, height: 120, resizeMode: 'contain' }} />
+          <View style={{ alignItems: 'center', marginTop: 48, marginBottom: 12 }}>
+            <Image source={require('../../assets/images/register.png')} style={{ width: 260, height: 180, resizeMode: 'contain' }} />
           </View>
-          {/* Heading */}
-          <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#222', marginBottom: 8, marginLeft: 0, alignSelf: 'flex-start' }}>Sign Up</Text>
-          {/* Email Input */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, width: '100%' }}>
-            <Ionicons name="mail-outline" size={20} color="#a3a3a3" style={{ marginRight: 8, position: 'absolute', left: 16, zIndex: 2 }} />
-            <LinearGradient
-              colors={["#f8e8ff", "#f3f3fa"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{
-                flex: 1,
-                borderRadius: 16,
-                paddingHorizontal: 0,
-                justifyContent: 'center',
-                minHeight: 48,
-                elevation: 1,
-              }}
-            >
-              <TextInput
+          {/* Centered Sign Up Form */}
+          <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', width: '100%', marginTop: 40 }}>
+            {/* Heading */}
+            <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#222', marginBottom: 8, alignSelf: 'flex-start' }}>Sign Up</Text>
+            {/* Email Input */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+              <Ionicons name="mail-outline" size={20} color="#a3a3a3" style={{ marginRight: 8, position: 'absolute', left: 16, zIndex: 2 }} />
+              <LinearGradient
+                colors={["#f8e8ff", "#f3f3fa"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={{
-                  height: 48,
-                  fontSize: 16,
-                  color: '#222',
-                  backgroundColor: 'transparent',
+                  flex: 1,
                   borderRadius: 16,
-                  paddingLeft: 40,
-                  paddingRight: 16,
+                  paddingHorizontal: 0,
+                  justifyContent: 'center',
+                  minHeight: 48,
+                  elevation: 1,
                 }}
-                placeholder="Email ID"
-                value={email}
-                onChangeText={setEmail}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                placeholderTextColor="#bbb"
-              />
-            </LinearGradient>
-          </View>
-          {/* Password Input */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, width: '100%' }}>
-            <Ionicons name="lock-closed-outline" size={20} color="#a3a3a3" style={{ marginRight: 8, position: 'absolute', left: 16, zIndex: 2 }} />
-            <LinearGradient
-              colors={["#f8e8ff", "#f3f3fa"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{
-                flex: 1,
-                borderRadius: 16,
-                paddingHorizontal: 0,
-                justifyContent: 'center',
-                minHeight: 48,
-                elevation: 1,
-              }}
-            >
-              <TextInput
+              >
+                <TextInput
+                  style={{
+                    height: 48,
+                    fontSize: 16,
+                    color: '#222',
+                    backgroundColor: 'transparent',
+                    borderRadius: 16,
+                    paddingLeft: 40,
+                    paddingRight: 16,
+                  }}
+                  placeholder="Email ID"
+                  value={email}
+                  onChangeText={setEmail}
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  placeholderTextColor="#bbb"
+                />
+              </LinearGradient>
+            </View>
+            {/* Password Input */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, width: '100%' }}>
+              <Ionicons name="lock-closed-outline" size={20} color="#a3a3a3" style={{ marginRight: 8, position: 'absolute', left: 16, zIndex: 2 }} />
+              <LinearGradient
+                colors={["#f8e8ff", "#f3f3fa"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={{
-                  height: 48,
-                  fontSize: 16,
-                  color: '#222',
-                  backgroundColor: 'transparent',
+                  flex: 1,
                   borderRadius: 16,
-                  paddingLeft: 40,
-                  paddingRight: 40,
+                  paddingHorizontal: 0,
+                  justifyContent: 'center',
+                  minHeight: 48,
+                  elevation: 1,
                 }}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-                placeholderTextColor="#bbb"
-              />
-              <Pressable onPress={() => setShowPassword((prev) => !prev)} style={{ position: 'absolute', right: 8, top: 13 }}>
-                <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#a3a3a3" />
-              </Pressable>
-            </LinearGradient>
-          </View>
-          {/* Confirm Password Input */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 32, width: '100%' }}>
-            <Ionicons name="lock-closed-outline" size={20} color="#a3a3a3" style={{ marginRight: 8, position: 'absolute', left: 16, zIndex: 2 }} />
-            <LinearGradient
-              colors={["#f8e8ff", "#f3f3fa"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{
-                flex: 1,
-                borderRadius: 16,
-                paddingHorizontal: 0,
-                justifyContent: 'center',
-                minHeight: 48,
-                elevation: 1,
-              }}
-            >
-              <TextInput
+              >
+                <TextInput
+                  style={{
+                    height: 48,
+                    fontSize: 16,
+                    color: '#222',
+                    backgroundColor: 'transparent',
+                    borderRadius: 16,
+                    paddingLeft: 40,
+                    paddingRight: 40,
+                  }}
+                  placeholder="Password"
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={!showPassword}
+                  placeholderTextColor="#bbb"
+                />
+                <Pressable onPress={() => setShowPassword((prev) => !prev)} style={{ position: 'absolute', right: 8, top: 13 }}>
+                  <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#a3a3a3" />
+                </Pressable>
+              </LinearGradient>
+            </View>
+            {/* Confirm Password Input */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 32, width: '100%' }}>
+              <Ionicons name="lock-closed-outline" size={20} color="#a3a3a3" style={{ marginRight: 8, position: 'absolute', left: 16, zIndex: 2 }} />
+              <LinearGradient
+                colors={["#f8e8ff", "#f3f3fa"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 style={{
-                  height: 48,
-                  fontSize: 16,
-                  color: '#222',
-                  backgroundColor: 'transparent',
+                  flex: 1,
                   borderRadius: 16,
-                  paddingLeft: 40,
-                  paddingRight: 40,
+                  paddingHorizontal: 0,
+                  justifyContent: 'center',
+                  minHeight: 48,
+                  elevation: 1,
                 }}
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry={!showConfirmPassword}
-                placeholderTextColor="#bbb"
-              />
-              <Pressable onPress={() => setShowConfirmPassword((prev) => !prev)} style={{ position: 'absolute', right: 8, top: 13 }}>
-                <Ionicons name={showConfirmPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#a3a3a3" />
-              </Pressable>
-            </LinearGradient>
-          </View>
-          {/* Sign Up Button */}
-          <Pressable style={{ width: '100%', backgroundColor: '#93329e', borderRadius: 8, paddingVertical: 16, alignItems: 'center', marginTop: 8, marginBottom: 8 }} onPress={handleSignUp}>
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Sign Up</Text>
-          </Pressable>
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
-            <Text>Already have an account?</Text>
-            <Text style={{ color: '#93329e', fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 16, marginLeft: 4 }} onPress={() => router.replace('/screens/sign-in')}>Sign In</Text>
+              >
+                <TextInput
+                  style={{
+                    height: 48,
+                    fontSize: 16,
+                    color: '#222',
+                    backgroundColor: 'transparent',
+                    borderRadius: 16,
+                    paddingLeft: 40,
+                    paddingRight: 40,
+                  }}
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  secureTextEntry={!showConfirmPassword}
+                  placeholderTextColor="#bbb"
+                />
+                <Pressable onPress={() => setShowConfirmPassword((prev) => !prev)} style={{ position: 'absolute', right: 8, top: 13 }}>
+                  <Ionicons name={showConfirmPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#a3a3a3" />
+                </Pressable>
+              </LinearGradient>
+            </View>
+            {/* Sign Up Button */}
+            <Pressable style={{ width: '100%', backgroundColor: '#93329e', borderRadius: 8, paddingVertical: 16, alignItems: 'center', marginTop: 8, marginBottom: 8 }} onPress={handleSignUp}>
+              <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Sign Up</Text>
+            </Pressable>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
+              <Text>Already have an account?</Text>
+              <Text style={{ color: '#93329e', fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 16, marginLeft: 4 }} onPress={() => router.replace('/screens/sign-in')}>Sign In</Text>
+            </View>
           </View>
         </Pressable>
       </KeyboardAvoidingView>

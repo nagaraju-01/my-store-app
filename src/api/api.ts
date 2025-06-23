@@ -120,4 +120,19 @@ export const api = {
     if (!res.ok) throw new Error('Failed to delete debt');
     return true;
   },
+
+  deleteCustomer: async (customerId: string, token: string, onUnauthorized?: () => void) => {
+    const res = await fetch(`${API_BASE}/customers/${customerId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.status === 401) {
+      if (onUnauthorized) onUnauthorized();
+      throw new Error('Unauthorized');
+    }
+    if (res.status === 204) return true; // Success, no content
+    if (res.status === 404) throw new Error('Customer not found');
+    if (!res.ok) throw new Error('Failed to delete customer');
+    return true;
+  },
 };

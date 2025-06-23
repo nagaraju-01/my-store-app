@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, Animated, Easing, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, Vibration, View } from 'react-native';
+import { ActivityIndicator, Alert, Animated, Easing, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, Vibration, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { api } from '../../src/api/api';
@@ -195,19 +195,11 @@ export default function DebtScreen() {
     <>
       <Stack.Screen options={{ headerShown: false }} />
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 28 }}>
           <Text style={styles.backButton} onPress={() => router.back()}>{'<'}</Text>
-          <Ionicons.Button
-            name="log-out-outline"
-            backgroundColor="transparent"
-            color="#d32f2f"
-            size={26}
-            underlayColor="transparent"
-            activeOpacity={0.7}
-            onPress={handleLogout}
-            style={styles.logoutButton}
-            iconStyle={{ marginRight: 0 }}
-          />
+          <TouchableOpacity onPress={handleLogout} style={{ backgroundColor: '#fff', borderRadius: 24, padding: 12, elevation: 2, shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 4 }}>
+            <Ionicons name="log-out-outline" size={32} color="#d32f2f" />
+          </TouchableOpacity>
         </View>
         <View style={{ height: 32 }} />
         <Text style={styles.headerText}>Debts for {customerName}</Text>
@@ -276,12 +268,12 @@ export default function DebtScreen() {
           onRequestClose={() => setShowAddDebtModal(false)}
         >
           <View style={styles.modalOverlay}>
-            <View style={styles.addDebtModalCard}>
+            <View style={[styles.addDebtModalCard, { minHeight: 340, borderRadius: 20, padding: 28, width: '98%', maxWidth: 480, alignItems: 'center', justifyContent: 'center', paddingBottom: 24 }]}>
               <Text style={styles.addDebtModalTitle}>Add Debt</Text>
               <TextInput
                 style={[
                   styles.inputGradient,
-                  { flex: 1 },
+                  { width: '100%', minWidth: 0, maxWidth: undefined, fontSize: 20, minHeight: 56 },
                   amountError && styles.inputError
                 ]}
                 placeholder="Amount"
@@ -292,12 +284,15 @@ export default function DebtScreen() {
               <TextInput
                 style={[
                   styles.inputGradient,
-                  { flex: 2 },
+                  { width: '100%', minWidth: 0, maxWidth: undefined, fontSize: 20, minHeight: 56 },
                   descriptionError && styles.inputError
                 ]}
                 placeholder="Description"
                 value={description}
                 onChangeText={handleDescriptionChange}
+                multiline={false} // make single line like amount
+                numberOfLines={1}
+                textAlignVertical="center"
               />
               <Pressable
                 style={styles.addDebtModalButton}
@@ -306,7 +301,7 @@ export default function DebtScreen() {
               >
                 <Text style={styles.addDebtModalButtonText}>{adding ? 'Adding...' : 'Add Debt'}</Text>
               </Pressable>
-              <Pressable onPress={() => setShowAddDebtModal(false)}>
+              <Pressable onPress={() => setShowAddDebtModal(false)} style={{ marginTop: 4 }}>
                 <Text style={styles.addDebtModalCancel}>Cancel</Text>
               </Pressable>
             </View>
@@ -344,39 +339,39 @@ export default function DebtScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f7f7f7', padding: 10 }, // reduced padding
+  container: { flex: 1, backgroundColor: '#f7f7f7', padding: 18 }, // increased padding
   backButton: {
-    fontSize: 28,
+    fontSize: 34, // increased size
     color: '#0d8cae',
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 14,
     alignSelf: 'flex-start',
-    paddingVertical: 2,
-    paddingHorizontal: 6,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 24, // increased size
     fontWeight: 'bold',
     color: '#0d8cae',
-    marginTop: 4, // reduce margin if any
-    marginBottom: 2,
+    marginTop: 6,
+    marginBottom: 4,
   },
   totalDebtText: {
-    fontSize: 16,
+    fontSize: 18, // increased size
     fontWeight: 'bold',
     color: '#0d8cae',
-    marginBottom: 10,
-    marginTop: 10, // reduced from 24
+    marginBottom: 12,
+    marginTop: 12,
     marginLeft: 2,
   },
   addDebtMainButton: {
     backgroundColor: '#93329e',
     borderRadius: 24,
-    paddingVertical: 14,
-    paddingHorizontal: 32,
+    paddingVertical: 18, // increased
+    paddingHorizontal: 38, // increased
     alignItems: 'center',
     alignSelf: 'center',
-    marginVertical: 18,
+    marginVertical: 22,
     shadowColor: '#93329e',
     shadowOpacity: 0.18,
     shadowRadius: 8,
@@ -386,7 +381,7 @@ const styles = StyleSheet.create({
   addDebtMainButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20, // increased
     letterSpacing: 1,
   },
   modalOverlay: {
@@ -398,57 +393,67 @@ const styles = StyleSheet.create({
   addDebtModalCard: {
     backgroundColor: '#fff',
     borderRadius: 18,
-    paddingVertical: 32,
-    paddingHorizontal: 28,
-    minWidth: 260,
+    paddingVertical: 36,
+    paddingHorizontal: 24, // slightly reduced for more width
+    minWidth: 0,
+    width: '95%',
+    maxWidth: 400,
     alignItems: 'center',
     shadowColor: '#93329e',
     shadowOpacity: 0.18,
     shadowRadius: 12,
     elevation: 12,
+    minHeight: 340, // ensure more vertical space
+    justifyContent: 'flex-start', // keep content at the top
   },
   addDebtModalTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#0d8cae',
-    marginBottom: 18,
+    marginBottom: 20,
+    alignSelf: 'flex-start',
   },
   addDebtModalButton: {
-    backgroundColor: '#0d8cae',
+    backgroundColor: '#93329e', // Match main +Add Debt button color
     borderRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 32,
+    paddingVertical: 14,
+    paddingHorizontal: 0,
     alignItems: 'center',
-    marginTop: 18,
-    marginBottom: 8,
-    shadowColor: '#0d8cae',
+    marginTop: 20,
+    marginBottom: 10,
+    shadowColor: '#93329e',
     shadowOpacity: 0.18,
     shadowRadius: 8,
     elevation: 6,
+    width: '100%',
   },
   addDebtModalButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
     letterSpacing: 1,
+    textAlign: 'center',
   },
   addDebtModalCancel: {
     color: '#d32f2f',
     fontWeight: 'bold',
-    fontSize: 15,
-    marginTop: 6,
+    fontSize: 16,
+    marginTop: 4,
     textDecorationLine: 'underline',
+    alignSelf: 'center',
   },
   inputGradient: {
     borderWidth: 1,
     borderColor: '#e0e0e0',
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 14,
-    fontSize: 15,
-    backgroundColor: '#fff',
-    marginBottom: 8,
-    minWidth: 120,
+    borderRadius: 8, // match Add Customer
+    padding: 16, // match Add Customer
+    marginBottom: 16,
+    fontSize: 20,
+    backgroundColor: '#f9f9f9',
+    width: '100%',
+    minWidth: 0,
+    maxWidth: undefined,
+    minHeight: 56,
   },
   inputError: {
     borderColor: '#ff1744',
@@ -460,24 +465,24 @@ const styles = StyleSheet.create({
   },
   gradientButton: {
     borderRadius: 24,
-    paddingVertical: 10,
-    paddingHorizontal: 22,
+    paddingVertical: 12, // increased
+    paddingHorizontal: 26, // increased
     justifyContent: 'center',
     alignItems: 'center',
-    minWidth: 90,
-    marginLeft: 4,
+    minWidth: 100, // increased
+    marginLeft: 6,
     shadowColor: '#93329e',
     shadowOpacity: 0.18,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 4 },
     elevation: 6,
     marginTop: 0,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   gradientButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18, // increased
     letterSpacing: 1,
     textAlign: 'center',
   },
@@ -485,9 +490,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#eaf6fa',
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 8,
+    borderRadius: 10,
+    padding: 14, // increased
+    marginBottom: 10,
     justifyContent: 'flex-start',
     flexWrap: 'nowrap',
     width: '100%',
@@ -496,15 +501,15 @@ const styles = StyleSheet.create({
   debtSerial: {
     fontWeight: 'bold',
     color: '#93329e',
-    fontSize: 15,
-    minWidth: 28,
+    fontSize: 17, // increased
+    minWidth: 32, // increased
     textAlign: 'center',
-    marginRight: 6,
+    marginRight: 8,
     flexShrink: 0,
   },
-  debtAmount: { fontWeight: 'bold', color: '#0d8cae', fontSize: 16, minWidth: 60, flexShrink: 0 },
-  debtDesc: { color: '#333', fontSize: 14, flex: 1, marginHorizontal: 8, minWidth: 0, maxWidth: 110, flexShrink: 1 },
-  debtDate: { color: '#888', fontSize: 13, minWidth: 70, textAlign: 'right', flexShrink: 0 },
+  debtAmount: { fontWeight: 'bold', color: '#0d8cae', fontSize: 18, minWidth: 70, flexShrink: 0 },
+  debtDesc: { color: '#333', fontSize: 16, flex: 1, marginHorizontal: 10, minWidth: 0, maxWidth: 140, flexShrink: 1 },
+  debtDate: { color: '#888', fontSize: 15, minWidth: 80, textAlign: 'right', flexShrink: 0 },
   logoutButton: {
     marginRight: 0,
     padding: 0,
@@ -517,8 +522,8 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   deleteDebtButton: {
-    marginLeft: 4,
-    padding: 6,
+    marginLeft: 6,
+    padding: 8,
     borderRadius: 16,
     backgroundColor: 'rgba(255,23,68,0.08)',
     alignItems: 'center',

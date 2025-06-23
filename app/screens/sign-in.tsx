@@ -123,53 +123,56 @@ export default function SignInScreen() {
       >
         <Pressable onPress={handleScreenPress} style={{ flex: 1, width: '100%' }}>
           {/* Custom Back Button */}
-          <Pressable onPress={() => router.replace('/')} style={{ position: 'absolute', top: 8, left: -8, zIndex: 10, padding: 8 }}>
-            <Text style={{ fontSize: 28, color: '#93329e', fontWeight: 'bold' }}>{'<'}</Text>
+          <Pressable onPress={() => router.replace('/')} style={{ position: 'absolute', top: 32, left: 0, zIndex: 10, padding: 16, borderRadius: 24 }}>
+            <Text style={{ fontSize: 36, color: '#93329e', fontWeight: 'bold' }}>{'<'}</Text>
           </Pressable>
           {/* Illustration */}
-          <View style={{ alignItems: 'center', marginTop: 48, marginBottom: 16 }}>
-            <Image source={require('../../assets/images/login.png')} style={{ width: 180, height: 120, resizeMode: 'contain' }} />
+          <View style={{ alignItems: 'center', marginTop: 40, marginBottom: 12 }}>
+            <Image source={require('../../assets/images/login.png')} style={{ width: 260, height: 180, resizeMode: 'contain' }} />
           </View>
-          {/* Heading */}
-          <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#222', marginBottom: 32, marginLeft: 0, alignSelf: 'flex-start' }}>Login</Text>
-          {/* Error Message */}
-          {message ? (
-            <View style={{ backgroundColor: '#ffeaea', borderRadius: 6, padding: 10, marginBottom: 16, alignSelf: 'stretch' }}>
-              <Text style={{ color: '#d32f2f', fontSize: 15 }}>{message}</Text>
+          {/* Centered Login Form */}
+          <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', width: '100%', marginTop: 40 }}>
+            {/* Heading */}
+            <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#222', marginBottom: 32, marginLeft: 0, alignSelf: 'flex-start' }}>Login</Text>
+            {/* Error Message */}
+            {message ? (
+              <View style={{ backgroundColor: '#ffeaea', borderRadius: 6, padding: 10, marginBottom: 16, alignSelf: 'stretch' }}>
+                <Text style={{ color: '#d32f2f', fontSize: 15 }}>{message}</Text>
+              </View>
+            ) : null}
+            {/* Email Input */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderColor: '#e0e0e0', marginBottom: 24, width: '100%', paddingHorizontal: 0 }}>
+              <Ionicons name="mail-outline" size={20} color="#a3a3a3" style={{ marginRight: 8 }} />
+              <TextInput
+                style={{ flex: 1, height: 48, fontSize: 16, color: '#222', backgroundColor: 'transparent' }}
+                placeholder="Email ID"
+                value={email}
+                onChangeText={setEmail}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                placeholderTextColor="#bbb"
+              />
             </View>
-          ) : null}
-          {/* Email Input */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderColor: '#e0e0e0', marginBottom: 24, width: '100%', paddingHorizontal: 0 }}>
-            <Ionicons name="mail-outline" size={20} color="#a3a3a3" style={{ marginRight: 8 }} />
-            <TextInput
-              style={{ flex: 1, height: 48, fontSize: 16, color: '#222', backgroundColor: 'transparent' }}
-              placeholder="Email ID"
-              value={email}
-              onChangeText={setEmail}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              placeholderTextColor="#bbb"
-            />
-          </View>
-          {/* Password Input */}
-          <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderColor: '#e0e0e0', marginBottom: 32, width: '100%', paddingHorizontal: 0 }}>
-            <Ionicons name="lock-closed-outline" size={20} color="#a3a3a3" style={{ marginRight: 8 }} />
-            <TextInput
-              style={{ flex: 1, height: 48, fontSize: 16, color: '#222', backgroundColor: 'transparent' }}
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
-              placeholderTextColor="#bbb"
-            />
-            <Pressable onPress={() => setShowPassword((prev) => !prev)}>
-              <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#a3a3a3" style={{ marginLeft: 8 }} />
+            {/* Password Input */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderColor: '#e0e0e0', marginBottom: 32, width: '100%', paddingHorizontal: 0 }}>
+              <Ionicons name="lock-closed-outline" size={20} color="#a3a3a3" style={{ marginRight: 8 }} />
+              <TextInput
+                style={{ flex: 1, height: 48, fontSize: 16, color: '#222', backgroundColor: 'transparent' }}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                placeholderTextColor="#bbb"
+              />
+              <Pressable onPress={() => setShowPassword((prev) => !prev)}>
+                <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={22} color="#a3a3a3" style={{ marginLeft: 8 }} />
+              </Pressable>
+            </View>
+            {/* Login Button */}
+            <Pressable style={{ width: '100%', backgroundColor: '#93329e', borderRadius: 8, paddingVertical: 16, alignItems: 'center', marginTop: 8, marginBottom: 8 }} onPress={handleSignIn}>
+              <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
             </Pressable>
           </View>
-          {/* Login Button */}
-          <Pressable style={{ width: '100%', backgroundColor: '#93329e', borderRadius: 8, paddingVertical: 16, alignItems: 'center', marginTop: 8, marginBottom: 8 }} onPress={handleSignIn}>
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Login</Text>
-          </Pressable>
         </Pressable>
       </KeyboardAvoidingView>
     </>
